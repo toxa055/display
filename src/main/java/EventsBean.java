@@ -1,6 +1,13 @@
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.faces.bean.ManagedBean;
+import java.io.Serializable;
 import java.util.List;
 
-public class EventsBean {
+@ManagedBean
+@Startup
+@Singleton
+public class EventsBean implements Serializable {
 
     private List<Event> events;
 
