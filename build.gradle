@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.rehab'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
