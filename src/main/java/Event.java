@@ -1,26 +1,32 @@
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Event {
-    private Integer insuranceNumber;
+    private Integer patientInsuranceNumber;
     private String patientName;
     private String nurseName;
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime plannedTime;
     private String eventState;
     private String cureName;
     private String cureType;
     private String dose;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate endDate;
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime endTime;
     private String comment;
 
-    public Event() {
+    public Integer getPatientInsuranceNumber() {
+        return patientInsuranceNumber;
     }
 
-    public Integer getInsuranceNumber() {
-        return insuranceNumber;
-    }
-
-    public void setInsuranceNumber(Integer insuranceNumber) {
-        this.insuranceNumber = insuranceNumber;
+    public void setPatientInsuranceNumber(Integer patientInsuranceNumber) {
+        this.patientInsuranceNumber = patientInsuranceNumber;
     }
 
     public String getPatientName() {
@@ -77,6 +83,14 @@ public class Event {
 
     public void setDose(String dose) {
         this.dose = dose;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public LocalTime getEndTime() {
