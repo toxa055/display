@@ -9,5 +9,47 @@
 </h:head>
 <h:body>
     <h2>Events</h2>
+    <h:dataTable value="#{eventsJSF.getEventsBean().getEvents()}" var="event">
+        <h:column>
+            <f:facet name="header">Ins.№</f:facet>
+            #{event.patientInsuranceNumber}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Patient</f:facet>
+            #{event.patientName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Nurse</f:facet>
+            #{event.nurseName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Time</f:facet>
+            #{event.plannedTime}
+        </h:column>
+        <h:column>
+            <f:facet name="header">State</f:facet>
+            #{event.eventState}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Cure</f:facet>
+            #{event.cureName}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Type</f:facet>
+            #{event.cureType}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Dose</f:facet>
+            #{event.dose}
+        </h:column>
+        <h:column>
+            <f:facet name="header">End Date/Time</f:facet>
+            #{event.endDate} #{event.endTime}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Comment</f:facet>
+            #{event.comment}
+        </h:column>
+    </h:dataTable>
 </h:body>
 </html>
