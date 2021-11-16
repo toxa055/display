@@ -2,54 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+    <h:outputStylesheet library="css" name="style.css"/>
     <title>Events</title>
 </h:head>
 <h:body>
-    <h2>Events</h2>
-    <h:dataTable value="#{eventsJSF.getEventsBean().getEvents()}" var="event">
-        <h:column>
-            <f:facet name="header">Ins.№</f:facet>
-            #{event.patientInsuranceNumber}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Patient</f:facet>
-            #{event.patientName}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Nurse</f:facet>
-            #{event.nurseName}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Time</f:facet>
-            #{event.plannedTime}
-        </h:column>
-        <h:column>
-            <f:facet name="header">State</f:facet>
-            #{event.eventState}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Cure</f:facet>
-            #{event.cureName}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Type</f:facet>
-            #{event.cureType}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Dose</f:facet>
-            #{event.dose}
-        </h:column>
-        <h:column>
-            <f:facet name="header">End Date/Time</f:facet>
-            #{event.endDate} #{event.endTime}
-        </h:column>
-        <h:column>
-            <f:facet name="header">Comment</f:facet>
-            #{event.comment}
-        </h:column>
-    </h:dataTable>
+    <h2 class="heading-section"><h:outputText value="Events"/></h2>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th><h:outputText value="Ins.№"/></th>
+            <th><h:outputText value="Patient"/></th>
+            <th><h:outputText value="Nurse"/></th>
+            <th><h:outputText value="Planned Time"/></th>
+            <th><h:outputText value="State"/></th>
+            <th><h:outputText value="Cure"/></th>
+            <th><h:outputText value="Type"/></th>
+            <th><h:outputText value="Dose"/></th>
+            <th><h:outputText value="End Date/Time"/></th>
+            <th><h:outputText value="Comment"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <ui:repeat value="#{eventsJSF.eventsBean.events}" var="event">
+            <tr class="#{event.eventState == 'PLANNED' ? 'planned' :
+            event.eventState == 'PERFORMED' ? 'performed' : 'cancelled'}">
+                <td><h:outputText value="#{event.patientInsuranceNumber}"/></td>
+                <td><h:outputText value="#{event.patientName}"/></td>
+                <td><h:outputText value="#{event.nurseName}"/></td>
+                <td><h:outputText value="#{event.plannedTime}"/></td>
+                <td><h:outputText value="#{event.eventState}"/></td>
+                <td><h:outputText value="#{event.cureName}"/></td>
+                <td><h:outputText value="#{event.cureType}"/></td>
+                <td><h:outputText value="#{event.dose}"/></td>
+                <td><h:outputText value="#{event.endDate}"/></td>
+                <td><h:outputText value="#{event.comment}"/></td>
+            </tr>
+        </ui:repeat>
+        </tbody>
+    </table>
 </h:body>
 </html>
