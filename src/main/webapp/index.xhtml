@@ -6,6 +6,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <h:outputStylesheet library="css" name="style.css"/>
+    <meta http-equiv="refresh" content="5"/>
     <title>Events</title>
 </h:head>
 <h:body>
@@ -37,7 +38,7 @@
                 <td><h:outputText value="#{event.cureName}"/></td>
                 <td><h:outputText value="#{event.cureType}"/></td>
                 <td><h:outputText value="#{event.dose}"/></td>
-                <td><h:outputText value="#{event.endDate}"/></td>
+                <td><h:outputText value="#{event.endDate} #{event.endTime}"/></td>
                 <td><h:outputText value="#{event.comment}"/></td>
             </tr>
         </ui:repeat>
