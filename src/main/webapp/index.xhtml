@@ -10,36 +10,28 @@
     <title>Events</title>
 </h:head>
 <h:body>
-    <h2 class="heading-section"><h:outputText value="Events"/></h2>
     <table class="table">
         <thead class="thead-dark">
         <tr>
             <th><h:outputText value="Ins.№"/></th>
             <th><h:outputText value="Patient"/></th>
             <th><h:outputText value="Nurse"/></th>
-            <th><h:outputText value="Planned Time"/></th>
-            <th><h:outputText value="State"/></th>
+            <th><h:outputText value="Time"/></th>
             <th><h:outputText value="Cure"/></th>
             <th><h:outputText value="Type"/></th>
             <th><h:outputText value="Dose"/></th>
-            <th><h:outputText value="End Date/Time"/></th>
-            <th><h:outputText value="Comment"/></th>
         </tr>
         </thead>
         <tbody>
         <ui:repeat value="#{eventsJSF.eventsBean.events}" var="event">
-            <tr class="#{event.eventState == 'PLANNED' ? 'planned' :
-            event.eventState == 'PERFORMED' ? 'performed' : 'cancelled'}">
+            <tr>
                 <td><h:outputText value="#{event.patientInsuranceNumber}"/></td>
                 <td><h:outputText value="#{event.patientName}"/></td>
                 <td><h:outputText value="#{event.nurseName}"/></td>
                 <td><h:outputText value="#{event.plannedTime}"/></td>
-                <td><h:outputText value="#{event.eventState}"/></td>
                 <td><h:outputText value="#{event.cureName}"/></td>
                 <td><h:outputText value="#{event.cureType}"/></td>
                 <td><h:outputText value="#{event.dose}"/></td>
-                <td><h:outputText value="#{event.endDate} #{event.endTime}"/></td>
-                <td><h:outputText value="#{event.comment}"/></td>
             </tr>
         </ui:repeat>
         </tbody>
