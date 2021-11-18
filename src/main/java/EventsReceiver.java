@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import java.util.concurrent.TimeoutException;
 public class EventsReceiver {
 
     private static final String QUEUE = "events_queue";
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Inject
     private EventsBean eventsBean;
@@ -31,11 +33,10 @@ public class EventsReceiver {
 
     @PostConstruct
     public void init() throws IOException, TimeoutException {
-        var mapper = new ObjectMapper();
-
         var config = new DefaultClientConfig();
         var client = Client.create(config);
         var service = client.resource(UriBuilder.fromUri("http://localhost:8060").build());
+        getEvents(service);
 
         var connectionFactory = new ConnectionFactory();
         connectionFactory.setHost("localhost");
@@ -52,9 +53,7 @@ public class EventsReceiver {
                         Thread.sleep(500);
                     } catch (InterruptedException e) {
                     }
-                    var stringEvents = service.path("rest").path("events")
-                            .accept(MediaType.APPLICATION_JSON_TYPE).get(String.class);
-                    eventsBean.setEvents(List.of(mapper.readValue(stringEvents, Event[].class)));
+                    getEvents(service);
                 }
             }
         };
@@ -67,6 +66,15 @@ public class EventsReceiver {
             connection.close();
             channel.close();
         } catch (IOException | TimeoutException e) {
+        }
+    }
+
+    private void getEvents(WebResource service) {
+        try {
+            var stringEvents = service.path("rest").path("events")
+                    .accept(MediaType.APPLICATION_JSON_TYPE).get(String.class);
+            eventsBean.setEvents(List.of(MAPPER.readValue(stringEvents, Event[].class)));
+        } catch (Exception e) {
         }
     }
 }
