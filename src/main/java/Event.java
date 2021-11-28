@@ -3,14 +3,47 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 
 import java.time.LocalTime;
 
+/**
+ * Class describing event which contains information about patient,
+ * what time and which cure they have to be given.
+ * It also contains nurse name.
+ */
 public class Event {
+
+    /**
+     * Patient unique insurance number.
+     */
     private Integer patientInsuranceNumber;
+
+    /**
+     * Patient name, second name.
+     */
     private String patientName;
+
+    /**
+     * Nurse name, second name, who is performer of current event.
+     */
     private String nurseName;
+
+    /**
+     * Planned date when current event has to be performed.
+     */
     @JsonDeserialize(using = LocalTimeDeserializer.class)
     private LocalTime plannedTime;
+
+    /**
+     * Cure name which is used for patient's treating.
+     */
     private String cureName;
+
+    /**
+     * Cure type.
+     */
     private String cureType;
+
+    /**
+     * Particular amount of current cure.
+     */
     private String dose;
 
     public Integer getPatientInsuranceNumber() {
